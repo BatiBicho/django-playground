@@ -14,6 +14,17 @@ quotes_week = {
 }
 
 
+def index(request):
+    list_items = ""
+    days = list(quotes_week.keys())  # [monday, tuesday, ...]
+
+    for day in days:
+        day_path = reverse("quote-day", args=[day])
+        list_items += f'<li><a href="{day_path}">{day}</a></li>'
+    response_html = f"<ul>{list_items}</ul>"
+    return HttpResponse(response_html)
+
+
 def days_week(request, day):
     try:
         quote_day = quotes_week[day]
