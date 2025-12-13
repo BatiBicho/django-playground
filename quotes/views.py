@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound
-
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.urls import reverse
 # Create your views here.
 
 quotes_week = {
@@ -23,4 +23,9 @@ def days_week(request, day):
 
 
 def days_week_with_number(request, day):
-    return HttpResponse(f"El numero del dia es: {day}")
+    days = list(quotes_week.keys())
+    if day < 1 or day > len(days):
+        return HttpResponseNotFound("Dia no encontrado")
+    redirected_day = days[day - 1]
+    redirected_path = reverse("quote-day", args=[redirected_day])
+    return HttpResponseRedirect(redirected_path)
