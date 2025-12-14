@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Quotes Home
+{% endblock title %}
+    
+{% block content %}
+    <h1>Welcome to the Quotes Page</h1>
+    <p>Here you can find various quotes.</p>
+
+    <ul>
+        {% for day in days_list %}
+        <li><a href="{% url 'quote-day' day %}">{{ day }}</a></li>
+        {% endfor %}
+    </ul>    
+        
+{% endblock content %}

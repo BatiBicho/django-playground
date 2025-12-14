@@ -1,13 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Landing</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Landing Page
+{% endblock title %}
+    
+
+{% block content %}
     <h1>Hola landing</h1>
     <p>Nombre: {{ name | upper }}</p>
     <p>Fecha: {{ today | date:"d/m/Y" }}</p>
-</body>
-</html>
+    
+    {% if name == "Bicho" %}
+        <h1>Welcome Admin</h1>
+    {% else %}
+        <h1>Welcome User</h1>
+    {% endif %}
+
+    <h2>Stack Tecnologias:</h2>
+
+    <ul>
+        {% for tool in stack %}
+            <li><a href="{% url 'stack' tool.id %}">{{ tool.name }}</a></li>
+        {% empty %}
+            <li>No hay herramientas en el stack.</li>    
+        {% endfor %}
+            
+    </ul>
+{% endblock content %}

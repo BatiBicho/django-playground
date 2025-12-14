@@ -5,7 +5,15 @@ from datetime import date
 
 
 def home(request):
+    stack_list = [{"id": "django", "name": "Django"},
+                  {"id": "python", "name": "Python"},]
+
     return render(request, 'landing/landing.html', {
-        'name': 'Juan Perez',
+        'name': 'Bicho',
         'today': date.today(),
+        'stack': stack_list
     })
+
+
+def stack_detail(request, tool):
+    return HttpResponse(f"Tecnología: {tool}")
